@@ -1,117 +1,225 @@
-Task 1: Design Principles
-1.1
-KISS (Keep It Simple, Stupid)
-1.2
-KISS (Keep It Simple, Stupid) - is a design principle which states that designs and/or systems should be as simple as possible. Wherever possible, complexity should be avoided in a system -- as simplicity guarantees the greatest levels of user acceptance and interaction. KISS is used in a variety of disciplines, such as interface design, product design, and software development. 
-The term was first used in the US Navy and is thought to have been coined by Kelly Johnson, who was the lead engineer at the Lockheed Skunk Works. Johnson told the designers at Lockheed that their designs should be simple enough to be repaired by a man in a combat situation with only some basic mechanic’s training and simple tools. If their products weren’t simple and easy to understand, they would not only cost lives but also quickly become obsolete in combat conditions and thus worthless. 
-In the world of user experience design and related disciplines, the KISS principle borrows from such a scenario in that users who tend to lead busy lives will quickly abandon a complex design. In the case of designing for mobile devices—where the users’ context finds them operating their phones with their fingers, often with one hand—this philosophy is even more vital to follow.
-1.3
-The KISS (Keep It Simple, Stupid) method in the military refers to the principle of designing systems and strategies that are simple, straightforward, and devoid of unnecessary complexity. The method emphasizes the importance of easily understandable and executable plans and designs to avoid misunderstandings, errors, and complications, ensuring the swift and effective accomplishment of objectives. 
-This principle is universally applicable and is valued in numerous fields, including design, for its emphasis on clarity and ease of use.
+<!DOCTYPE html>
+<html lang="en">
 
-References: https://www.interaction-design.org/literature/topics/keep-it-simple-stupid
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.5s ease; /* Add transition for smooth color change */
+        }
 
-Task 2: Design Patterns
-2.1 
-Factory Method
-2.2
-In object-oriented programming, the Factory Method is a Creational Design Pattern that allows us to create objects without specifying the exact class that will be instantiated. Instead of creating objects directly, we use a factory method to create and return them. This Design Pattern promotes code reuse and loose coupling between classes making our code more modular and easier to maintain. It enables us to create objects without knowing the implementation details of our classes. 
-The Factory Method pattern defines an interface for creating objects, but it allows subclasses to decide which class to instantiate. 
-It encapsulates the object creation logic in a separate method, which can be overridden by subclasses to create different types of objects. This pattern is useful when we want to create objects that belong to a single family of classes and defer instantiation to their subclasses. The Factory Method Design Pattern is a creational pattern that provides an interface for creating objects but allows subclasses to decide which class to instantiate. 
-It is a pattern that promotes loose coupling between classes and promotes code reuse. The Factory Method Design Pattern is particularly useful when we don’t know the exact class of object that will be created at runtime. 
+        h1 {
+            color: #ff3399;
+            z-index: 2;
+        }
 
-The Factory Method pattern is useful when:
-- We don’t know the exact class of object that will be created at runtime.
-- We want to encapsulate the object creation process.
-- We want to promote loose coupling between classes.
-- We want to promote code reuse.
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-2.3
-class FrenchLocalizer:
- 
-    """ it simply returns the french version """
- 
-    def __init__(self):
- 
-        self.translations = {"car": "voiture", "bike": "bicyclette",
-                             "cycle":"cyclette"}
- 
-    def localize(self, msg):
- 
-        """change the message using translations"""
-        return self.translations.get(msg, msg)
- 
-class SpanishLocalizer:
-    """it simply returns the spanish version"""
- 
-    def __init__(self):
-        self.translations = {"car": "coche", "bike": "bicicleta",
-                             "cycle":"ciclo"}
- 
-    def localize(self, msg):
- 
-        """change the message using translations"""
-        return self.translations.get(msg, msg)
- 
-class EnglishLocalizer:
-    """Simply return the same message"""
- 
-    def localize(self, msg):
-        return msg
- 
-def Factory(language ="English"):
- 
-    """Factory Method"""
-    localizers = {
-        "French": FrenchLocalizer,
-        "English": EnglishLocalizer,
-        "Spanish": SpanishLocalizer,
-    }
- 
-    return localizers[language]()
- 
-if __name__ == "__main__":
- 
-    f = Factory("French")
-    e = Factory("English")
-    s = Factory("Spanish")
- 
-    message = ["car", "bike", "cycle"]
- 
-    for msg in message:
-        print(f.localize(msg))
-        print(e.localize(msg))
-        print(s.localize(msg))
+        button {
+            background-color: #ff66b2;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 2;
+        }
 
-References: https://www.pentalog.com/blog/design-patterns/factory-method-design-pattern/#:~:text=The%20Factory%20Method%20Design%20Pattern%20is%20a%20creational%20pattern%20that,classes%20and%20promotes%20code%20reuse.
-https://www.geeksforgeeks.org/factory-method-python-design-patterns/
+        button:hover {
+            background-color: #ff3385;
+        }
 
-Task 3: Combining Design Principles and Patterns
-3.1
-Single Responsibility Principle (SRP) and Factory Method Design
-3.2
-Design patterns are reusable solutions to common problems in software design that provide guidelines and best practices for structuring code. 
-To support the Single Responsibility Principle (SRP), some design patterns include the Factory Pattern, which abstracts the object creation process into a separate class or method.
-When using design patterns or frameworks that support the SRP, you need to consider the context, the problem, and the trade-offs of each option. You also must balance the SRP with other principles and factors, such as performance, usability, and scalability. To use design patterns or frameworks effectively, you should identify the responsibilities of each class or module in your code and split them into smaller units if they have more than one reason to change. 
-Additionally, choose a design pattern or framework that matches your problem domain, platform, and goals. Apply it consistently and coherently throughout your code and avoid mixing different patterns or frameworks that may conflict with each other. Lastly, refactor your code regularly and use tools and metrics to measure cohesion and coupling of your code to look for ways to increase them.
+        #noButton {
+            background-color: #ff66b2;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 2;
+            position: absolute;
+            left: calc(50% - 30px); /* Adjusted initial X position to be centered */
+            top: calc(50% + 80px); /* Adjusted initial Y position to be below the center */
+        }
 
-References: https://www.linkedin.com/advice/0/how-do-you-use-design-patterns-frameworks-support#:~:text=The%20Single%20Responsibility%20Principle%20(SRP,single%2C%20well%2Ddefined%20responsibility.
+        #noButton + p {
+            margin-top: 5px;
+            color: #555;
+        }
 
-Task 4: Critical Analysis 
-4.1
-My personal website (sujinomi.github.io/miguel/home.html)
-4.2
-Since it is still a WIP website, I am testing all sorts of features and designs that I want to implement on my website. There are still lots of mis-design that include dead spaces, unnecessary codes, and lazy coding.
-4.3
-Many websites encounter common design flaws, including mine. Some flaws included are as follow:
-- Poor Navigation: effective navigation is the backbone of a user-friendly website. Many websites fall short in this aspect, either by employing overly complex menu structures or failing to provide clear, intuitive paths for users to find the content they seek. A confusing navigation system can frustrate visitors and result in higher bounce rates.
-- Lack of Mobile Responsiveness: Failing to optimize for mobile devices can result in a poor user experience. Statista’s findings that 61% of organic searches come from smartphones. Other research further asserts that this trend is still on the rise. 
-What does that mean for you? Among other things, it means that there is a big chance your target customers are searching for your content via mobile devices. If you bring your website's responsiveness to the next level, future leads will be able to find you easier. As the use of mobile device continues to grow, it's crucial for websites to be responsive, adapting seamlessly to different screen sizes. Sites that aren't optimized for mobile can lead to a subpar user experience, with elements not displaying correctly or requiring excessive zooming and scrolling.
-- Slow Loading Times: Slow-loading websites can drive users away and negatively impact SEO. In today's fast-paced digital world, users expect websites to load quickly. Slow-loading pages can lead to user impatience and abandonment, adversely affecting a site's bounce rate and search engines ranking. Image and code optimization is vital to improving load times.
-- Inconsistent Design: Incoherent design elements across a site can be disorienting. A cohesive design is essential for creating a professional and visually appealing websites. Websites that lack consistency in fonts, colors, and layouts can appear unpolished and confused users. Consistency is also crucial for building a strong brand identity.
-- Overwhelming Content: Overcrowded pages with too much content can overwhelm visitors. An overload of content, crowded layouts, or excessive pop-ups can overwhelm and discourage users. Cluttered websites make it difficult for visitors to focus on the information they need and can negatively impact the user experience.
-- Ignoring Accessibility: Failing to provide accessible features can exclude users with disabilities. Web accessibility is not only a legal requirement in many regions but also a matter of inclusion. Websites that don't take accessibility into account can exclude individuals with disabilities, such as those with visual of hearing impairments. Simple design adjustments and alternative text for images can go a long way in improving accessibility.
-- Poor Typography: Illegible fonts and poor contrast affect readability.
-- Lack of Contact Information: Transparency and trust are vital in online interactions. Websites that don't provide clear contact information, such as a physical address or phone number, may deter potential customers. Displaying contact details prominently builds credibility.
-- Lack of Feedback: Users should receive feedback for actions like form submissions. When users interact with a website it's crucial to provide a feedback or error messages. Failing to do so can leave users confused or uncertain about whether their action were successful.
-- Overuse of Media: Too many large images or videos can slow down a website's performance. While images and videos enhance the visual appearance of a website, overuse can slow down page loading times, leading to user frustation. Efficient image compression and lazy loading can help maintain a balance between media-rich content and site performance.
+        /* Falling animation styles */
+        .falling-element {
+            position: absolute;
+            font-size: 20px;
+            color: #ff3385;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50vh);
+            }
+
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        #player {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Will you be my Valentine?</h1>
+    <div class="button-container">
+        <button onclick="showMessage('Yes')">Yes</button>
+        <button id="noButton" onmouseover="moveNoButtonRandomly()" onclick="showMessage('No')">No</button>
+    </div>
+    <br>
+    <!-- YouTube API script -->
+    <script async src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- The iframe where the YouTube video will be embedded -->
+    <div id="player"><iframe width="500" height="300" src="https://www.youtube.com/embed/SeehzKRlxn0?autoplay=1"
+            title="Drake - Anita Maxx Wynn (Jersey Club Remix) Prod. @fazobeats" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe></div>
+
+    <script>
+        // YouTube video player
+        var player;
+        var colorChangeInterval;
+
+        // Function called when the YouTube API is ready
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '300',
+                width: '500',
+                videoId: 'SeehzKRlxn0', // Replace with your YouTube video ID
+                playerVars: {
+                    autoplay: 1,
+                    loop: 1,
+                    controls: 0,
+                    showinfo: 0,
+                    rel: 0,
+                    modestbranding: 1
+                },
+                events: {
+                    onReady: function (event) {
+                        // Mute the video
+                    },
+                    onStateChange: function (event) {
+                        if (event.data === YT.PlayerState.ENDED) {
+                            event.target.seekTo(0); // Restart video when it ends
+                        }
+                        if (event.data === YT.PlayerState.PLAYING) {
+                            startContinuousColorChange();
+                        }
+                    }
+                }
+            });
+        }
+
+        function showMessage(response) {
+            if (response === 'Yes') {
+                openInstagram();
+                player.playVideo(); // Play the video when 'Yes' is clicked
+                document.getElementById('player').style.display = 'block'; // Show the video player
+            } else {
+                alert('Maybe next time...');
+            }
+        }
+
+        function startContinuousColorChange() {
+            colorChangeInterval = setInterval(function () {
+                // Generate a random color
+                var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                document.body.style.backgroundColor = randomColor;
+            }, 500); // Change color every 0.5 seconds
+        }
+
+        function stopContinuousColorChange() {
+            clearInterval(colorChangeInterval);
+        }
+
+        function moveNoButtonRandomly() {
+            var noButton = document.getElementById('noButton');
+            var maxX = window.innerWidth - noButton.clientWidth;
+            var maxY = window.innerHeight - noButton.clientHeight;
+
+            var newX = Math.floor(Math.random() * maxX);
+            var newY = Math.floor(Math.random() * maxY);
+
+            noButton.style.left = newX + 'px';
+            noButton.style.top = newY + 'px';
+        }
+
+        function openInstagram() {
+            // Replace 'YOUR_INSTAGRAM_PROFILE_ID' with your actual Instagram profile ID
+            var instagramProfileId = 'YOUR_VALENTINE<333';
+            var instagramLink = 'https://www.instagram.com/migegs_/' + instagramProfileId;
+            window.open(instagramLink, '_blank');
+        }
+
+        // Function to create falling elements
+        function createFallingElements() {
+            const numberOfElements = 50;
+
+            for (let i = 0; i < numberOfElements; i++) {
+                createFallingElement();
+            }
+        }
+
+        // Function to create individual falling element
+        function createFallingElement() {
+            const element = document.createElement('div');
+            element.className = 'falling-element';
+            element.innerHTML = '❤'; // Unicode heart character
+
+            const startPosition = Math.random() * window.innerWidth;
+            const animationDuration = Math.random() * 5 + 5;
+
+            element.style.left = startPosition + 'px';
+            element.style.animationDuration = animationDuration + 's';
+
+            document.body.appendChild(element);
+
+            // Remove the element when the animation is finished
+            element.addEventListener('animationiteration', function () {
+                document.body.removeChild(element);
+                createFallingElement(); // Create a new element to replace the removed one
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            createFallingElements();
+        });
+    </script>
+</body>
+
+</html>
