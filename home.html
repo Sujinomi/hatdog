@@ -16,7 +16,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            transition: background-color 0.5s ease; /* Add transition for smooth color change */
+            transition: background-color 0.5s ease;
         }
 
         h1 {
@@ -60,13 +60,19 @@
             transition: background-color 0.3s ease;
             z-index: 2;
             position: absolute;
-            left: calc(50% - 30px); /* Adjusted initial X position to be centered */
-            top: calc(50% + 80px); /* Adjusted initial Y position to be below the center */
+            left: calc(50% - 30px);
+            top: calc(50% + 80px);
         }
 
         #noButton + p {
             margin-top: 5px;
             color: #555;
+        }
+
+        .instagram-link {
+            margin-top: 20px;
+            color: #ff66b2;
+            font-size: 16px;
         }
 
         /* Falling animation styles */
@@ -111,16 +117,14 @@
             allowfullscreen></iframe></div>
 
     <script>
-        // YouTube video player
         var player;
         var colorChangeInterval;
 
-        // Function called when the YouTube API is ready
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '300',
                 width: '500',
-                videoId: 'SeehzKRlxn0', // Replace with your YouTube video ID
+                videoId: 'SeehzKRlxn0',
                 playerVars: {
                     autoplay: 1,
                     loop: 1,
@@ -135,10 +139,13 @@
                     },
                     onStateChange: function (event) {
                         if (event.data === YT.PlayerState.ENDED) {
-                            event.target.seekTo(0); // Restart video when it ends
+                            event.target.seekTo(0);
                         }
                         if (event.data === YT.PlayerState.PLAYING) {
                             startContinuousColorChange();
+                        }
+                        if (event.data === YT.PlayerState.PLAYING && player.getCurrentTime() > 60) {
+                            player.seekTo(0);
                         }
                     }
                 }
@@ -147,20 +154,26 @@
 
         function showMessage(response) {
             if (response === 'Yes') {
-                openInstagram();
-                player.playVideo(); // Play the video when 'Yes' is clicked
-                document.getElementById('player').style.display = 'block'; // Show the video player
+                showInstagramLink();
+                player.playVideo();
+                document.getElementById('player').style.display = 'block';
             } else {
                 alert('Maybe next time...');
             }
         }
 
+        function showInstagramLink() {
+            var instagramLink = document.createElement('p');
+            instagramLink.className = 'instagram-link';
+            instagramLink.innerHTML = "Message me on Instagram: <a href='https://www.instagram.com/migegs_/' target='_blank'>@migegs_</a>";
+            document.body.appendChild(instagramLink);
+        }
+
         function startContinuousColorChange() {
             colorChangeInterval = setInterval(function () {
-                // Generate a random color
                 var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
                 document.body.style.backgroundColor = randomColor;
-            }, 500); // Change color every 0.5 seconds
+            }, 500);
         }
 
         function stopContinuousColorChange() {
@@ -179,14 +192,6 @@
             noButton.style.top = newY + 'px';
         }
 
-        function openInstagram() {
-            // Replace 'YOUR_INSTAGRAM_PROFILE_ID' with your actual Instagram profile ID
-            var instagramProfileId = 'YOUR_VALENTINE<333';
-            var instagramLink = 'https://www.instagram.com/migegs_/' + instagramProfileId;
-            window.open(instagramLink, '_blank');
-        }
-
-        // Function to create falling elements
         function createFallingElements() {
             const numberOfElements = 50;
 
@@ -195,11 +200,10 @@
             }
         }
 
-        // Function to create individual falling element
         function createFallingElement() {
             const element = document.createElement('div');
             element.className = 'falling-element';
-            element.innerHTML = '❤'; // Unicode heart character
+            element.innerHTML = '❤';
 
             const startPosition = Math.random() * window.innerWidth;
             const animationDuration = Math.random() * 5 + 5;
@@ -209,10 +213,9 @@
 
             document.body.appendChild(element);
 
-            // Remove the element when the animation is finished
             element.addEventListener('animationiteration', function () {
                 document.body.removeChild(element);
-                createFallingElement(); // Create a new element to replace the removed one
+                createFallingElement();
             });
         }
 
